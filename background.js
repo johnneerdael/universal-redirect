@@ -9,42 +9,61 @@ function updateRules() {
     const rules = [];
     let id = 1;
 
-    for (const [site, redirectUrl] of Object.entries(items)) {
-      if (!redirectUrl) continue;
+    const mediumLikeSites = [
+      'medium.com', 'towardsaws.com', 'hackernoon.com', 'medium.freecodecamp.org', 'medium.mybridge.co',
+      'proandroiddev.com', 'blog.usejournal.com', 'blog.angularindepth.com', 'blog.bitsrc.io',
+      'blog.devartis.com', 'blog.maddevs.io', 'blog.getambassador.io', 'instagram-engineering.com',
+      'calia.me', 'engineering.opsgenie.com', 'android.jlelse.eu', 'robinhood.engineering',
+      'blog.hipolabs.com', 'ux.shopify.com', 'enlear.academy', 'cantorsparadise.com',
+      'blog.roost.io', '500ish.com', 'faun.pub', 'asleekgeek.com', 'andrewzuo.com', 'awstip.com',
+      'baos.pub', 'plainenglish.io', 'betterappsec.com', 'blog.angulartraining.com',
+      'blog.codegiant.io', 'blog.coffeeapplied.com', 'blog.devgenius.io', 'blog.kotlin-academy.com',
+      'blog.kubernauts.io', 'blog.securitybreak.io', 'blog.securityevaluators.com',
+      'blog.startupstash.com', 'bytes.grubhub.com', 'coinsbench.com', 'engineering.talkdesk.com',
+      'interviewnoodle.com', 'levelupprogramming.net', 'marcbalmer.ch', 'medium.matcha.fyi',
+      'netflixtechblog.com', 'pub.towardsai.net', 'systemweakness.com', 'tech.olx.com',
+      'techuisite.com', 'themakingofamillionaire.com', 'trading-data-analysis.pro',
+      'unbounded.io', 'wire.insiderfinance.io', 'inbitcoinwetrust.net', 'blog.dancounsell.com',
+      'experiencestack.co', 'golang.thisweekin.io', 'insightsndata.com'
+    ];
 
-      let regexFilter;
-      let regexSubstitution;
+    const mediumRedirectUrl = items['medium.com'];
+
+    if (mediumRedirectUrl) {
+      for (const site of mediumLikeSites) {
+        // Escape the '.' characters in the site name
+        const escapedSite = site.replace(/\./g, '\\.');
+        // Capture the path in the regex filter
+        const regexFilter = `^https?://(?:[^/]+\\.)?${escapedSite}(/.*)`;
+        // Use the captured path (\1) in the substitution
+        const regexSubstitution = `https://${mediumRedirectUrl}\\1`;
+        rules.push({
+          id: id++,
+          priority: 1,
+          action: { type: 'redirect', redirect: { regexSubstitution: regexSubstitution } },
+          condition: { regexFilter: regexFilter, resourceTypes: ['main_frame'] }
+        });
+      }
+    }
+
+    // Process other rules from storage that are not medium-like
+    for (const [site, redirectUrl] of Object.entries(items)) {
+      if (!redirectUrl || site === 'medium.com') continue;
 
       const escapedSite = site.replace(/\./g, '\\.');
-
-      if (site === 'medium.com') {
-        // Special rule for Medium: capture the entire URL and append it.
-        regexFilter = `^(https?://(?:[^/]+\\.)?medium\.com/.*)$`;
-        // Correctly escaped backreference for the entire match (\0)
-        regexSubstitution = `https://${redirectUrl}/\0`;
-      } else {
-        // General rule for all other sites: capture only the path.
-        regexFilter = `^https?://(?:www\.)?${escapedSite}(/.*)$`;
-        // Correctly escaped backreference for the first capture group (\1)
-        regexSubstitution = `https://${redirectUrl}/\1`;
-      }
+      const regexFilter = `^https?://(?:www\\.)?${escapedSite}(/.*)`;
+      const regexSubstitution = `https://${redirectUrl}\\1`;
 
       rules.push({
         id: id++,
         priority: 1,
-        action: {
-          type: 'redirect',
-          redirect: { regexSubstitution: regexSubstitution }
-        },
-        condition: {
-          regexFilter: regexFilter,
-          resourceTypes: ['main_frame']
-        }
+        action: { type: 'redirect', redirect: { regexSubstitution: regexSubstitution } },
+        condition: { regexFilter: regexFilter, resourceTypes: ['main_frame'] }
       });
     }
 
     chrome.declarativeNetRequest.updateDynamicRules({
-      removeRuleIds: Array.from({ length: 50 }, (_, i) => i + 1),
+      removeRuleIds: Array.from({ length: 100 }, (_, i) => i + 1),
       addRules: rules
     }, () => {
       if (chrome.runtime.lastError) {
