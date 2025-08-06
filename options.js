@@ -35,14 +35,8 @@ function extractHostname(url) {
 
 function updateHelperText() {
   const selectedSite = siteSelect.value;
-  const helperText = helpers[selectedSite] || '';
   const url = helperurl[selectedSite] || '';
-
-  // Update the placeholder text inside the input box
-  redirectUrlInput.placeholder = helperText;
-
-  // Update the helper text and link below the input box
-  redirectUrlHelper.innerHTML = `${helperText} ${url}`;
+  redirectUrlHelper.innerHTML = `${url}`;
 }
 
 siteSelect.addEventListener('change', updateHelperText);
