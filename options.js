@@ -5,14 +5,15 @@ const siteSelect = document.getElementById('site');
 const redirectUrlInput = document.getElementById('redirect-url');
 const redirectUrlHelper = document.getElementById('redirect-url-helper');
 
-const helpers = {
-  'medium.com': 'e.g., Freedium',
-  'youtube.com': 'e.g., Invidious',
-  'x.com': 'e.g., Nitter',
-  'tiktok.com': 'e.g., ProxiTok',
-  'google.com': 'e.g., SearXNG',
-  'reddit.com': 'e.g., Redlib'
-};
+  const urlHelpers = {
+    "medium.com": "e.g., freedium.cfd, scribe.rip, libmedium.com",
+    "youtube.com": "e.g., invidious.io, piped.video, yewtu.be",
+    "x.com": "e.g., nitter.net, twiiit.com, x.com",
+    "tiktok.com": "e.g., proxitok.pabloferreiro.es, proxitok.pussthecat.org",
+    "google.com": "e.g., searx.me, whoogle.net",
+    "reddit.com": "e.g., libreddit.it, teddit.net",
+    "instagram.com": "e.g., proxigram.protokolla.fi, proxigram.pussthecat.org"
+  };
 const helperurl = {
   'medium.com': '<a href="https://github.com/Freedium-cfd" target="_blank">https://github.com/Freedium-cfd</a>',
   'youtube.com': '<a href="https://docs.invidious.io/instances/" target="_blank">https://docs.invidious.io/instances/</a>',

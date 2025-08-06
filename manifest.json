@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Universal Redirector",
   "version": "1.0",
-  "description": "A open-source Universal Redirector specialized for Medium and Youtube.",
+  "description": "A open-source Universal Redirector specialized for Medium, Youtube and Instagram.",
   "permissions": [
     "declarativeNetRequest",
     "storage"

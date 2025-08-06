@@ -1,6 +1,6 @@
 # Project Overview
 
-This project is a simple yet effective Chrome extension called "Freedium." Its main purpose is to automatically redirect all Medium.com articles to Freedium, a privacy-friendly alternative front-end. By intercepting URL requests to Medium.com, the extension ensures that users can access content without being tracked.
+This project is a simple yet effective Chrome extension called "Freedium." Its main purpose is to automatically redirect all Medium.com and Instagram.com articles to Freedium and Proxigram, a privacy-friendly alternative front-end. By intercepting URL requests to Medium.com, the extension ensures that users can access content without being tracked.
 
 The extension is built using `manifest.json`, which defines its core functionalities and permissions. The redirection logic is handled by a declarative rule in the `rules.json` file, which matches Medium.com URLs and redirects them to the corresponding Freedium URL. This approach ensures that the extension is lightweight and efficient, as it does not require a background script to handle redirections.
 

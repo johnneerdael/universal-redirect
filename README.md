@@ -1,6 +1,6 @@
 # Universal Redirector
 
-**Universal Redirector** is a powerful and flexible Chrome extension that automatically redirects URLs from a predefined list of websites to a user-specified destination. It's particularly useful for redirecting from popular platforms like Medium and YouTube to privacy-friendly or alternative front-ends.
+**Universal Redirector** is a powerful and flexible Chrome extension that automatically redirects URLs from a predefined list of websites to a user-specified destination. It's particularly useful for redirecting from popular platforms like Medium, YouTube, and Instagram to privacy-friendly or alternative front-ends.
 
 ## Features
 
@@ -53,6 +53,7 @@ This extension is great for redirecting to privacy-respecting alternative front-
 - **SearXNG**: A privacy-respecting metasearch engine. Find instances at [searx.space](https://searx.space/).
 - **ProxiTok**: A privacy-respecting front-end for TikTok. Find instances at [github.com/pablouser1/ProxiTok#instances](https://github.com/pablouser1/ProxiTok#instances).
 - **Redlib**: A private front-end for Reddit. Find instances at [github.com/redlib-org/redlib#instances](https://github.com/redlib-org/redlib#instances).
+- **Proxigram**: An alternative front-end to Instagram. Find instances at [codeberg.org/proxigram/proxigram/wiki/Instances](https://codeberg.org/proxigram/proxigram/wiki/Instances).
 
 ## Supported Sites
 

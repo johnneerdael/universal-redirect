@@ -51,8 +51,13 @@ function updateRules() {
       if (!redirectUrl || site === 'medium.com') continue;
 
       const escapedSite = site.replace(/\./g, '\\.');
-      const regexFilter = `^https?://(?:www\\.)?${escapedSite}(/.*)`;
-      const regexSubstitution = `https://${redirectUrl}\\1`;
+      let regexFilter;
+      if (site === 'instagram.com') {
+        regexFilter = `^https?:\/\/(?:www\.)?${escapedSite}\/(p|reel)\/([^\/]+)\/?`;
+      } else {
+        regexFilter = `^https?:\/\/(?:www\.)?${escapedSite}(\/.*)`;
+      }
+      const regexSubstitution = `https://${redirectUrl}/\1/\2`;
 
       rules.push({
         id: id++,
