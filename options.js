@@ -88,7 +88,7 @@ form.addEventListener('submit', function(event) {
 
 tableBody.addEventListener('click', function(event) {
   if (event.target.classList.contains('edit-btn')) {
-    const site = event.targe.dataset.site;
+    const site = event.target.dataset.site;
     const url = event.target.dataset.url;
     siteSelect.value = site;
     redirectUrlInput.value = url;

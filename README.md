@@ -2,6 +2,10 @@
 
 A privacy-focused Chrome extension that automatically redirects you to alternative, privacy-friendly front-ends for popular websites. Take control of your browsing experience and protect your data from tracking.
 
+## How It Works
+
+This extension uses Chrome's `declarativeNetRequest` API to create redirection rules. When you navigate to a supported website, the extension intercepts the request before it's sent and redirects it to the privacy-focused alternative you've chosen. This method is fast, secure, and respects your privacy because the extension doesn't need to read the content of the pages you visit.
+
 ## Why Use Universal Redirect?
 
 Many popular websites, such as Google, YouTube, and Reddit, are known for their extensive tracking and data collection practices. Universal Redirect allows you to bypass these platforms and access their content through alternative front-ends that are designed with privacy in mind. These front-ends offer a more secure and anonymous browsing experience, free from ads, trackers, and other invasive technologies.
@@ -47,7 +51,7 @@ The extension should now be installed and active.
 2.  **Add a Redirect Rule:**
     *   On the options page, you will see a simple form.
     *   **Site to redirect:** Select the website you want to redirect from the dropdown list.
-    *   **Redirect URL:** Enter the domain of the alternative front-end you want to use (e.g., `invidious.io`). Do not include `https://` or any path.
+    *   **Redirect URL:** Enter *only the hostname* of the alternative front-end you want to use (e.g., `invidious.io`, `nitter.net`). Do not include `https://` or any path.
     *   **Save:** Click the "Save" button.
 
 The rule will be saved, and the extension will start redirecting immediately. You can change the redirect URL at any time by re-saving the options.
