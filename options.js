@@ -37,7 +37,12 @@ function updateHelperText() {
   const selectedSite = siteSelect.value;
   const helperText = helpers[selectedSite] || '';
   const url = helperurl[selectedSite] || '';
-  redirectUrlHelper.innerHTML = `${url}`;
+
+  // Update the placeholder text inside the input box
+  redirectUrlInput.placeholder = helperText;
+
+  // Update the helper text and link below the input box
+  redirectUrlHelper.innerHTML = `${helperText} ${url}`;
 }
 
 siteSelect.addEventListener('change', updateHelperText);
