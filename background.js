@@ -20,11 +20,13 @@ function updateRules() {
       if (site === 'medium.com') {
         // Special rule for Medium: capture the entire URL and append it.
         regexFilter = `^(https?://(?:[^/]+\\.)?medium\.com/.*)$`;
+        // Correctly escaped backreference for the entire match (\0)
         regexSubstitution = `https://${redirectUrl}/\0`;
       } else {
         // General rule for all other sites: capture only the path.
-        regexFilter = `^https?://(?:www\\.)?${escapedSite}(/.*)$`;
-        regexSubstitution = `https://${redirectUrl}\1`;
+        regexFilter = `^https?://(?:www\.)?${escapedSite}(/.*)$`;
+        // Correctly escaped backreference for the first capture group (\1)
+        regexSubstitution = `https://${redirectUrl}/\1`;
       }
 
       rules.push({
