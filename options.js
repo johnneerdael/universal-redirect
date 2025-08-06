@@ -6,8 +6,8 @@ const redirectUrlInput = document.getElementById('redirect-url');
 const redirectUrlHelper = document.getElementById('redirect-url-helper');
 
 const helpers = {
-  'medium.com': 'e.g., Freedium ',
-  'youtube.com': 'e.g., Invidious Instance',
+  'medium.com': 'e.g., Freedium',
+  'youtube.com': 'e.g., Invidious',
   'x.com': 'e.g., Nitter',
   'tiktok.com': 'e.g., ProxiTok',
   'google.com': 'e.g., SearXNG',
@@ -37,7 +37,7 @@ function updateHelperText() {
   const selectedSite = siteSelect.value;
   const helperText = helpers[selectedSite] || '';
   const url = helperurl[selectedSite] || '';
-  redirectUrlHelper.innerHTML = `${helperText} ${url}`;
+  redirectUrlHelper.innerHTML = `${url}`;
 }
 
 siteSelect.addEventListener('change', updateHelperText);
