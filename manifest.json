@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Redirector",
+  "name": "Universal Redirector",
   "version": "1.0",
-  "description": "A generic redirector extension.",
+  "description": "A open-source Universal Redirector specialized for Medium and Youtube.",
   "permissions": [
     "declarativeNetRequest",
     "storage"
