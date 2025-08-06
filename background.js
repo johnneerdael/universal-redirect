@@ -18,11 +18,13 @@ function updateRules() {
       const escapedSite = site.replace(/\./g, '\\.');
 
       if (site === 'medium.com') {
-        regexFilter = '^(https?://(?:[^/]+\\.)?medium\.com/.*)$';
-        regexSubstitution = 'https://' + redirectUrl + '/\\0';
+        // Special rule for Medium: capture the entire URL and append it.
+        regexFilter = `^(https?://(?:[^/]+\\.)?medium\.com/.*)$`;
+        regexSubstitution = `https://${redirectUrl}/\0`;
       } else {
-        regexFilter = '^(https?://(?:www\.)?' + escapedSite + '/(.*))$';
-        regexSubstitution = 'https://' + redirectUrl + '/\\1';
+        // General rule for all other sites: capture only the path.
+        regexFilter = `^https?://(?:www\\.)?${escapedSite}(/.*)$`;
+        regexSubstitution = `https://${redirectUrl}\1`;
       }
 
       rules.push({
