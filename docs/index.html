@@ -1,126 +1,102 @@
-<h1>Universal Redirector</h1>
-<p><strong>Universal Redirector</strong> is a powerful and flexible Chrome extension that automatically redirects URLs from a predefined list of websites to a user-specified destination. It&#39;s particularly useful for redirecting from popular platforms like Medium and YouTube to privacy-friendly or alternative front-ends.</p>
-<h2>Features</h2>
-<ul>
-<li><strong>Automatic Redirection</strong>: Seamlessly redirects pages in the background without any user interaction.</li>
-<li><strong>Custom Destination</strong>: Configure your preferred destination URL for redirections.</li>
-<li><strong>Wide Range of Supported Sites</strong>: Includes a comprehensive list of Medium-like websites and is easily expandable.</li>
-<li><strong>Efficient and Lightweight</strong>: Uses Chrome&#39;s <code>declarativeNetRequest</code> API for high performance and minimal resource usage.</li>
-<li><strong>Open Source</strong>: The code is open for anyone to inspect, modify, and contribute.</li>
-</ul>
-<h2>Installation</h2>
-<h3>From the Chrome Web Store (Recommended)</h3>
-<p>Once the extension is published, you will be able to install it directly from the Chrome Web Store.</p>
-<ol>
-<li>Go to the extension&#39;s page on the Chrome Web Store.</li>
-<li>Click &quot;Add to Chrome&quot;.</li>
-<li>The extension will be installed and ready to use.</li>
-</ol>
-<h3>Local Installation for Development</h3>
-<p>If you want to install the extension locally for testing or development:</p>
-<ol>
-<li>Clone this repository to your local machine:<pre><code class="language-bash">git clone &lt;repository-url&gt;
-</code></pre>
-</li>
-<li>Open Google Chrome and navigate to <code>chrome://extensions</code>.</li>
-<li>Enable <strong>Developer mode</strong> using the toggle switch in the top-right corner.</li>
-<li>Click the <strong>Load unpacked</strong> button.</li>
-<li>Select the directory where you cloned the repository.</li>
-</ol>
-<p>The extension will now be active.</p>
-<h2>How to Use</h2>
-<p>After installation, you need to configure the redirection settings:</p>
-<ol>
-<li>Right-click the extension icon in the Chrome toolbar and select <strong>Options</strong>.</li>
-<li>In the options page, you will see input fields for the sites you can redirect (e.g., <code>medium.com</code>, <code>youtube.com</code>).</li>
-<li>Enter the destination URL where you want the sites to be redirected. For example, if you want Medium articles to go to <code>freedium.cfd</code>, you would enter <code>freedium.cfd</code> in the input field for <code>medium.com</code>.</li>
-<li>The changes are saved automatically, and the redirection rules will be updated instantly.</li>
-</ol>
-<h3>Alternative Front-ends</h3>
-<p>This extension is great for redirecting to privacy-respecting alternative front-ends. Here are some popular examples:</p>
-<ul>
-<li><strong>Invidious</strong>: An alternative front-end to YouTube. Find instances at <a href="https://docs.invidious.io/instances/">docs.invidious.io</a>.</li>
-<li><strong>Nitter</strong>: An alternative front-end to Twitter. Find instances at <a href="https://github.com/zedeus/nitter/wiki/Instances">github.com/zedeus/nitter/wiki/Instances</a>.</li>
-<li><strong>SearXNG</strong>: A privacy-respecting metasearch engine. Find instances at <a href="https://searx.space/">searx.space</a>.</li>
-<li><strong>ProxiTok</strong>: A privacy-respecting front-end for TikTok. Find instances at <a href="https://github.com/pablouser1/ProxiTok#instances">github.com/pablouser1/ProxiTok#instances</a>.</li>
-<li><strong>Redlib</strong>: A private front-end for Reddit. Find instances at <a href="https://github.com/redlib-org/redlib#instances">github.com/redlib-org/redlib#instances</a>.</li>
-</ul>
-<h2>Supported Sites</h2>
-<p>The extension automatically redirects the following sites if a destination for <code>medium.com</code> is configured:</p>
-<ul>
-<li>towardsaws.com</li>
-<li>hackernoon.com</li>
-<li>medium.freecodecamp.org</li>
-<li>medium.mybridge.co</li>
-<li>proandroiddev.com</li>
-<li>blog.usejournal.com</li>
-<li>blog.angularindepth.com</li>
-<li>blog.bitsrc.io</li>
-<li>blog.devartis.com</li>
-<li>blog.maddevs.io</li>
-<li>blog.getambassador.io</li>
-<li>instagram-engineering.com</li>
-<li>calia.me</li>
-<li>engineering.opsgenie.com</li>
-<li>android.jlelse.eu</li>
-<li>robinhood.engineering</li>
-<li>blog.hipolabs.com</li>
-<li>ux.shopify.com</li>
-<li>enlear.academy</li>
-<li><a href="http://www.cantorsparadise.com">www.cantorsparadise.com</a></li>
-<li>blog.roost.io</li>
-<li>500ish.com</li>
-<li>faun.pub</li>
-<li>asleekgeek.com</li>
-<li>andrewzuo.com</li>
-<li>awstip.com</li>
-<li>baos.pub</li>
-<li>*.plainenglish.io</li>
-<li>betterappsec.com</li>
-<li>blog.angulartraining.com</li>
-<li>blog.codegiant.io</li>
-<li>blog.coffeeapplied.com</li>
-<li>blog.devgenius.io</li>
-<li>blog.kotlin-academy.com</li>
-<li>blog.kubernauts.io</li>
-<li>blog.securitybreak.io</li>
-<li>blog.securityevaluators.com</li>
-<li>blog.startupstash.com</li>
-<li>bytes.grubhub.com</li>
-<li>coinsbench.com</li>
-<li>engineering.talkdesk.com</li>
-<li>interviewnoodle.com</li>
-<li>levelupprogramming.net</li>
-<li>marcbalmer.ch</li>
-<li>medium.matcha.fyi</li>
-<li>netflixtechblog.com</li>
-<li>pub.towardsai.net</li>
-<li>systemweakness.com</li>
-<li>tech.olx.com</li>
-<li>techuisite.com</li>
-<li>themakingofamillionaire.com</li>
-<li>trading-data-analysis.pro</li>
-<li>unbounded.io</li>
-<li>wire.insiderfinance.io</li>
-<li><a href="http://www.inbitcoinwetrust.net">www.inbitcoinwetrust.net</a></li>
-<li>blog.dancounsell.com</li>
-<li>experiencestack.co</li>
-<li>golang.thisweekin.io</li>
-<li>insightsndata.com</li>
-</ul>
-<h2>Publishing to the Chrome Web Store</h2>
-<p>To publish the extension to the Chrome Web Store, follow these steps:</p>
-<ol>
-<li>Ensure all development files and unnecessary assets (like <code>.git</code>, <code>.DS_Store</code>, <code>.env</code>, <code>GEMINI.md</code>) are excluded. The provided <code>zip</code> command handles this.</li>
-<li>Create a <code>zip</code> file of the extension&#39;s contents:<pre><code class="language-bash">zip -r universal-redirect.zip . -x &quot;*.git*&quot; -x &quot;*.DS_Store&quot; -x &quot;README.md&quot; -x &quot;.env&quot; -x &quot;GEMINI.md&quot;
-</code></pre>
-</li>
-<li>Go to the <a href="https://chrome.google.com/webstore/developer/dashboard">Chrome Developer Dashboard</a>.</li>
-<li>Click on <strong>Add new item</strong>.</li>
-<li>Upload the <code>universal-redirect.zip</code> file.</li>
-<li>Complete the store listing information, including the extension&#39;s name, description, icons, and screenshots.</li>
-<li>Under the &quot;Privacy practices&quot; tab, be transparent about what the extension does.</li>
-<li>Once you have filled out all the required fields, you can submit the extension for review by clicking <strong>Publish</strong>.</li>
-</ol>
-<hr>
-<p>Thank you for using Universal Redirector!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Redirector</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .hero {
+            background: linear-gradient(45deg, #007bff, #6610f2);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-weight: 700;
+            font-size: 3.5rem;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+        .btn-primary {
+            background-color: #6610f2;
+            border-color: #6610f2;
+        }
+        .btn-primary:hover {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .section {
+            padding: 4rem 2rem;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+        .feature-icon {
+            font-size: 3rem;
+            color: #007bff;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Universal Redirector</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1>Universal Redirector</h1>
+            <p>A powerful and flexible Chrome extension for redirecting URLs to your preferred destinations.</p>
+            <a href="#" class="btn btn-primary btn-lg">Get Extension</a>
+        </div>
+    </header>
+
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">Features</h2>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon mb-3">&#128279;</div>
+                    <h3>Automatic Redirection</h3>
+                    <p>Seamlessly redirects pages in the background without any user interaction.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon mb-3">&#128205;</div>
+                    <h3>Custom Destination</h3>
+                    <p>Configure your preferred destination URL for redirections.</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="feature-icon mb-3">&#127760;</div>
+                    <h3>Wide Range of Supported Sites</h3>
+                    <p>Includes a comprehensive list of Medium-like websites and is easily expandable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Universal Redirector. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
