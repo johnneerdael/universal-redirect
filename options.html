@@ -109,6 +109,14 @@
       <option value="instagram.com">Instagram</option>
     </select>
     <br>
+    <div id="medium-options" style="display: none;">
+      <label for="medium-logic">Redirect Logic for Medium:</label>
+      <select id="medium-logic" name="medium-logic">
+        <option value="freedium">Freedium (Append Full URL)</option>
+        <option value="scribe">Scribe (Redirect to Base URL)</option>
+      </select>
+    </div>
+    <br>
     <label for="redirect-url">Redirect URL:</label>
     <input type="text" id="redirect-url" name="redirect-url" placeholder="e.g., freedium.cfd">
     <div id="redirect-url-helper" class="url-helper"></div>

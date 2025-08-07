@@ -28,15 +28,23 @@ function updateRules() {
     ];
 
     const mediumRedirectUrl = items['medium.com'];
+    const mediumLogic = items['mediumLogic'] || 'freedium';
 
     if (mediumRedirectUrl) {
       for (const site of mediumLikeSites) {
-        // Escape the '.' characters in the site name
         const escapedSite = site.replace(/\./g, '\\.');
-        // Capture the path in the regex filter
-        const regexFilter = `^https?://(?:[^/]+\\.)?${escapedSite}(/.*)`;
-        // Use the captured path (\1) in the substitution
-        const regexSubstitution = `https://${mediumRedirectUrl}\\1`;
+        let regexFilter, regexSubstitution;
+
+        if (mediumLogic === 'freedium') {
+          // Existing logic for Freedium - appends the full URL
+          regexFilter = `^https?://(?:[^/]+\\.)?${escapedSite}(/.*)`;
+          regexSubstitution = `https://${mediumRedirectUrl}\\1`;
+        } else {
+          // New logic for Scribe - redirects to the base URL
+          regexFilter = `^https?://(?:[^/]+\\.)?${escapedSite}(/.*)`;
+          regexSubstitution = `https://${mediumRedirectUrl}`;
+        }
+        
         rules.push({
           id: id++,
           priority: 1,
@@ -48,7 +56,7 @@ function updateRules() {
 
     // Process other rules from storage that are not medium-like
     for (const [site, redirectUrl] of Object.entries(items)) {
-      if (!redirectUrl || site === 'medium.com') continue;
+      if (!redirectUrl || site === 'medium.com' || site === 'mediumLogic') continue;
 
       const escapedSite = site.replace(/\./g, '\\.');
       let regexFilter;
@@ -57,7 +65,7 @@ function updateRules() {
       } else {
         regexFilter = `^https?:\/\/(?:www\.)?${escapedSite}(\/.*)`;
       }
-      const regexSubstitution = `https://${redirectUrl}/\1/\2`;
+      const regexSubstitution = `https://${redirectUrl}\1`;
 
       rules.push({
         id: id++,

@@ -4,23 +4,27 @@ const tableBody = document.querySelector('#redirects-table tbody');
 const siteSelect = document.getElementById('site');
 const redirectUrlInput = document.getElementById('redirect-url');
 const redirectUrlHelper = document.getElementById('redirect-url-helper');
+const mediumOptionsDiv = document.getElementById('medium-options');
+const mediumLogicSelect = document.getElementById('medium-logic');
 
   const urlHelpers = {
-    "medium.com": "e.g., freedium.cfd, scribe.rip, libmedium.com",
-    "youtube.com": "e.g., invidious.io, piped.video, yewtu.be",
-    "x.com": "e.g., nitter.net, twiiit.com, x.com",
-    "tiktok.com": "e.g., proxitok.pabloferreiro.es, proxitok.pussthecat.org",
-    "google.com": "e.g., searx.me, whoogle.net",
-    "reddit.com": "e.g., libreddit.it, teddit.net",
-    "instagram.com": "e.g., proxigram.protokolla.fi, proxigram.pussthecat.org"
+    "medium.com": "e.g., Freedium/Scribe",
+    "youtube.com": "e.g., Invidious",
+    "x.com": "e.g., Nitter",
+    "tiktok.com": "e.g., ProxiTok",
+    "google.com": "e.g., Whoogle/SearXNG",
+    "reddit.com": "e.g., Redlib",
+    "instagram.com": "e.g., Proxigram"
   };
+
 const helperurl = {
-  'medium.com': '<a href="https://github.com/Freedium-cfd" target="_blank">https://github.com/Freedium-cfd</a>',
-  'youtube.com': '<a href="https://docs.invidious.io/instances/" target="_blank">https://docs.invidious.io/instances/</a>',
-  'x.com': '<a href="https://github.com/zedeus/nitter" target="_blank">https://github.com/zedeus/nitter</a>',
-  'tiktok.com': '<a href="https://github.com/pablouser1/ProxiTok/wiki/Public-instances" target="_blank">https://github.com/pablouser1/ProxiTok/wiki/Public-instances</a>',
-  'google.com': '<a href="https://searx.space/" target="_blank">https://searx.space/</a>',
-  'reddit.com': '<a href="https://github.com/redlib-org/redlib-instances/blob/main/instances.md" target="_blank">https://github.com/redlib-org/redlib-instances/blob/main/instances.md</a>'
+  'medium.com': '<a href="https://git.sr.ht/~edwardloveall/scribe/tree/main/docs/instances.md" target="_blank">Scribe Instances</a>',
+  'youtube.com': '<a href="https://docs.invidious.io/instances/" target="_blank">Invidious Instances</a>',
+  'x.com': '<a href="https://status.d420.de/" target="_blank">Nitter Instances</a>',
+  'tiktok.com': '<a href="https://github.com/pablouser1/ProxiTok/wiki/Public-instances" target="_blank">ProxiTok Instances</a>',
+  'google.com': '<a href="https://github.com/benbusby/whoogle-search/blob/main/misc/instances.txt" target="_blank">Whoogle Instances</a> / <a href="https://searx.space/" target="_blank">SearXNG Instances</a>',
+  'reddit.com': '<a href="https://github.com/redlib-org/redlib-instances/blob/main/instances.md" target="_blank">Redlib Instances</a>',
+  "instagram.com": '<a href="https://codeberg.org/proxigram/proxigram/wiki/Instances" target="_blank">Proxigram Instances</a>'
 };
 
 function extractHostname(url) {
@@ -36,8 +40,15 @@ function extractHostname(url) {
 
 function updateHelperText() {
   const selectedSite = siteSelect.value;
-  const helperText = helpers[selectedSite] || '';
+  const helperText = urlHelpers[selectedSite] || '';
   const url = helperurl[selectedSite] || '';
+
+  // Show/hide medium-specific options
+  if (selectedSite === 'medium.com') {
+    mediumOptionsDiv.style.display = 'block';
+  } else {
+    mediumOptionsDiv.style.display = 'none';
+  }
 
   // Update the placeholder text inside the input box
   redirectUrlInput.placeholder = helperText;
@@ -48,9 +59,13 @@ function updateHelperText() {
 
 siteSelect.addEventListener('change', updateHelperText);
 
-function saveRule(site, redirectUrl) {
+function saveRule(site, redirectUrl, mediumLogic) {
   const hostname = extractHostname(redirectUrl);
-  chrome.storage.sync.set({ [site]: hostname }, function() {
+  const data = { [site]: hostname };
+  if (site === 'medium.com' && mediumLogic) {
+    data['mediumLogic'] = mediumLogic;
+  }
+  chrome.storage.sync.set(data, function() {
     status.textContent = 'Settings saved.';
     setTimeout(() => { status.textContent = ''; }, 3000);
     loadRules();
@@ -59,9 +74,18 @@ function saveRule(site, redirectUrl) {
 
 function deleteRule(site) {
   chrome.storage.sync.remove(site, function() {
-    status.textContent = 'Rule deleted.';
-    setTimeout(() => { status.textContent = ''; }, 3000);
-    loadRules();
+    // Also remove the mediumLogic setting if the medium rule is deleted
+    if (site === 'medium.com') {
+      chrome.storage.sync.remove('mediumLogic', function() {
+        status.textContent = 'Rule deleted.';
+        setTimeout(() => { status.textContent = ''; }, 3000);
+        loadRules();
+      });
+    } else {
+      status.textContent = 'Rule deleted.';
+      setTimeout(() => { status.textContent = ''; }, 3000);
+      loadRules();
+    }
   });
 }
 
@@ -69,6 +93,8 @@ function loadRules() {
   chrome.storage.sync.get(null, function(items) {
     tableBody.innerHTML = '';
     for (const [site, redirectUrl] of Object.entries(items)) {
+      if (site === 'mediumLogic') continue;
+      
       const row = document.createElement('tr');
       row.innerHTML = `
         <td>${site}</td>
@@ -87,7 +113,8 @@ form.addEventListener('submit', function(event) {
   event.preventDefault();
   const site = siteSelect.value;
   const redirectUrl = redirectUrlInput.value;
-  saveRule(site, redirectUrl);
+  const mediumLogic = (site === 'medium.com') ? mediumLogicSelect.value : null;
+  saveRule(site, redirectUrl, mediumLogic);
   form.reset();
   updateHelperText();
 });
