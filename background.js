@@ -65,7 +65,7 @@ function updateRules() {
       } else {
         regexFilter = `^https?:\/\/(?:www\.)?${escapedSite}(\/.*)`;
       }
-      const regexSubstitution = `https://${redirectUrl}\1`;
+      const regexSubstitution = `https://${redirectUrl}\\1`;
 
       rules.push({
         id: id++,
